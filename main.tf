@@ -23,11 +23,7 @@ resource "aws_instance" "remote-host" {
     volume_type = "gp2"
   }
 
-  tags = {
-    Name        = "remote-host"
-    Terraform   = "true"
-    Environment = "lab"
-  }
+  tags = var.tag-ec2
 }
 
 resource "aws_security_group" "security_jenkins_port" {
