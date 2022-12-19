@@ -4,7 +4,7 @@ resource "aws_instance" "remote-host" {
   instance_type           = "t2.micro"
   key_name                = var.key_name
   monitoring              = true
-  vpc_security_group_ids  = [aws_security_group.security_jenkins_port.id]
+  vpc_security_group_ids  = [aws_security_group.security_ec2_instance.id]
   availability_zone       = "eu-central-1b"
   iam_instance_profile    = "ec2-access"
   user_data               = <<EOF
@@ -26,8 +26,8 @@ resource "aws_instance" "remote-host" {
   tags = var.tag-ec2
 }
 
-resource "aws_security_group" "security_jenkins_port" {
-  name                  = "security_jenkins_port"
+resource "aws_security_group" "security_ec2_instance" {
+  name                  = "security_group_remote_host"
 
   ingress {
     from_port = 8080
